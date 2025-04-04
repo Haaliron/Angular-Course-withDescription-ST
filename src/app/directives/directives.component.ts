@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
+import { CustomDirectiveDirective } from './custom-directive.directive';
 
 @Component(
   {
 
   selector: 'app-directives',
-  imports: [],
-  //templateUrl: './directives.component.html',
-  template: `<div>...</div>`, //* template: `<div Directive Buraya Yazılır ! >...</div>`,
-  styleUrl: './directives.component.scss'
-
+  imports: [CustomDirectiveDirective],
+  templateUrl: './directives.component.html',
+  //template: `<div>...</div>`, //* template: `<div Directive Buraya Yazılır ! >...</div>`,
+  styleUrl: './directives.component.scss',
   })
 export class DirectivesComponent 
 {
-
+  
 }
 
 // Directive'ler Hazır ve Custom olarak kullanılarbilirler

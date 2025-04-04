@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DatabindingComponent } from "./databinding/databinding.component";
+import { DirectivesComponent } from "./directives/directives.component";
 
 @Component( //* Metadata, Decorator Componentin nasıl yapılandırılacağını belirtir
   {           
@@ -10,7 +11,7 @@ import { DatabindingComponent } from "./databinding/databinding.component";
   //        </body> 
   // gibi
 
-  imports: [RouterOutlet, DatabindingComponent], // *Angular 16 ile app.module.ts kaldırıldığı için declare işlemi
+  imports: [RouterOutlet, DirectivesComponent], // *Angular 16 ile app.module.ts kaldırıldığı için declare işlemi
 
   templateUrl: './app.component.html', //* Template 
   //template:`<h1>Template Kullanımı</h1>`, //* Harici html dosyası kullanılmak istenmezse bu şekilde de kullanılabilir
