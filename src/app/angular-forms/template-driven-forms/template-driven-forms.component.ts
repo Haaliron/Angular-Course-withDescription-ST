@@ -49,10 +49,14 @@ export class TemplateDrivenFormsComponent implements OnInit
     //* valid = İlgili kontrolün geçerli olup olmadığını kontrol eder. true/false.
     //* invalid = İlgili kontrolün geçersiz olup olmadığını kontrol eder. true/false. 
 
+    //* ngModelGroup Directive'i Angular'da birden fazla form kontrolünü gruplamak için kullanılan bir directive'dir.
+    //* <table ngModelGroup="groupName">inputs... </table> şeklinde kullanılır.
   }
   onSubmit(data: { name: string , surname: string }) //* 6- Form doldurulduğunda ve submit butonuna basıldığında component clas'a verilerin gönderilebilmesi için ngSubmit, eventi tetiklemesi için de bu fonksiyon tanımlanır.
   {
     console.log(data.name);
     console.log(data.surname);
   }
+
+  //* Form kontrollerine ilk değer atamak için setValue() metodu kullanılır. "this.frm.setValue({name: 'Ali', surname: 'Yılmaz'})" gibi.
 }

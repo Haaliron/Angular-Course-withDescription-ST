@@ -80,7 +80,7 @@ import { Component, Directive, Input, TemplateRef, ViewContainerRef } from '@ang
   ?              selector: 'app-component',
   ?              template: `
   ?              <ul>
-  \                <li *customFor ="5; let i">Halim {{i}}</li> //^ Verilen indexi gösterir (index)
+  \                <li *customFor ="5; let i ">Halim {{i}}</li> //^ Verilen indexi gösterir (index)
   ?              </ul>
   ?              `
   ?            }
