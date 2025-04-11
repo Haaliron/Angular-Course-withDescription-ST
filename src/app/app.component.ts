@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DirectivesComponent } from "./directives/directives.component";
-import { ValidationsComponent } from "./angular-forms/validations/validations.component";
+import { DependencyInjectionComponent } from "./dependency-injection/dependency-injection.component";
 
 @Component( //* Metadata, Decorator Componentin nasıl yapılandırılacağını belirtir
-  {           
+  {
   selector: 'app-root', //* Selector, Componentin uyglamanın herhangi bir yerinde nasıl çağırılacağını ifade eder
-  // Mesela <body> 
+  // Mesela <body>
   //          <app-root></app-root>
-  //        </body> 
+  //        </body>
   // gibi
 
-  imports: [RouterOutlet, ValidationsComponent], // *Angular 16 ile app.module.ts kaldırıldığı için declare işlemi
+  imports: [RouterOutlet, DependencyInjectionComponent, DependencyInjectionComponent], // *Angular 16 ile app.module.ts kaldırıldığı için declare işlemi
 
-  templateUrl: './app.component.html', //* Template 
+  templateUrl: './app.component.html', //* Template
   //template:`<h1>Template Kullanımı</h1>`, //* Harici html dosyası kullanılmak istenmezse bu şekilde de kullanılabilir
 
   styleUrl: './app.component.scss', //* Style
@@ -21,11 +20,18 @@ import { ValidationsComponent } from "./angular-forms/validations/validations.co
   }
 )
 export class AppComponent //* Component Class
-{ 
+{
   //* TypeScript ve jQuerry gibi işlemleri, component içerisinde kullanılacak değişken ve fonksiyonlar bu kısımda tanımlanır.
   //* API gibi dış servislere erişim sürecinin başlatılması da bu kısımda gerçekleşir
-  
+
   title = 'Course';
+
+  onClick() {
+    setTimeout(() => {
+      this.title = 'Course Updated'; //* title değişkeninin değeri güncelleniyor
+
+    }, 2000); //* 2 saniye bekle ve çalıştır
+  }
 }
 
 //* Bir component oluşturmak için ng g c name şeklinde kullanılır
