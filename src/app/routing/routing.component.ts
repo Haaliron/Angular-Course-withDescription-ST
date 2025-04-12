@@ -39,8 +39,67 @@ import { Component } from '@angular/core';
   + LocationStrategy: Angular uygulamasının URL'lerini nasıl yöneteceğini belirleyen bir yapılandırmadır. İki türü vardır:
 
       +1. HashLocationStrategy: URL'lerin hash (#) karakteri ile ayrıldığı bir yapıdır. Örnek: http://localhost:4200/#/home
+            ^HashLocationStrategy, Server-Side Rendering desteklemez. Tüm tarayıcılarda çalışır.
       +2. PathLocationStrategy: URL'lerin normal yollarla ayrıldığı bir yapıdır. Örnek: http://localhost:4200/home
+          ^PathLocationStrategy kullanıldığında, sunucu tarafında yönlendirme ayarlarının yapılması gerekir. Aksi takdirde, sayfa yenilendiğinde 404 hatası alınır. Bu nedenle, genellikle PathLocationStrategy tercih edilir. Eski tarayıcılarda çalışmaz. SSR (Server Side Rendering) için uygundur.
 
+  ' Route Parameteres Nedir ?
+  + Route parametreleri, URL'de dinamik olarak değişen değerlerdir. Örneğin, bir kullanıcının profil sayfasına gittiğinde, URL'de kullanıcının ID'si olabilir. Bu durumda, ID'yi route parametresi olarak tanımlayabiliriz. Route parametreleri, URL'deki belirli bir kısmı temsil eder ve genellikle ":" karakteri ile başlar. Örnek: /user/:id şeklinde tanımlanabilir.
+
+  'Activated Route Nesnesi ile URL'deki Parametreleri Okuma :
+  +   constructor (private activatedRoute: ActivatedRoute){
+  +     const id = this.activatedRoute.snapshot.paramMap.get('id'); // URL'deki id parametresini okuma
+  +     const hasId = this.activatedRoute.snapshot.paramMap.has('id'); // URL'de id parametresinin olup olmadığını kontrol etme
+  +   }
+
+  ' Observable ile URL'deki Parametreleri Okuma :
+  +   constructor (private activatedRoute: ActivatedRoute){
+  +     activatedRoute.paramMap.subscribe(({
+  +       next: param => console.log(param.get("id"))
+  +     });
+  +}
+
+  ! Observable yaklaşımını kullanmak daha iyidir çünkü reaktif yapılarda parametre değiştiğinde otomatik olarak güncellenir. Örneğin, kullanıcı profil sayfasında bir kullanıcıdan diğerine geçiş yapıldığında, parametre değişir ve yeni parametre otomatik olarak alınır.
+
+  *Child Routes / Nest Routes
+
+  + Angular'da bir route'un altına başka bir route eklemek için child routes kullanılır. Bu, uygulamanın daha düzenli ve okunabilir olmasını sağlar. Children altına children eklenebilir. Örnek:
+  ^ {
+  ^   path: "products", component: ProductsComponent,
+  ^    children: [
+  ^       {
+  ^         path: "electronics/:id", component: ElectronicsComponent,
+  ^         children: [
+  ^           {path: "", redirectTo: "details", pathMatch: "full"},
+  ^           {path: "details", component: ElectronicsDetailsComponent},
+  ^           {path: "reviews", component: ElectronicsReviewsComponent}
+  ^        ]
+  ^       }
+  ^    ]
+  ^ }
+
+  'Query String Nedir ?
+  + URL'de "?" karakterinden sonra gelen anahtar-değer çiftleridir. Örnek: http://localhost:4200/products?category=electronics&sort=price
+  + Query string, URL'de dinamik olarak değişen değerlerdir. Örneğin, bir ürün listesi sayfasında, kullanıcı ürünleri kategoriye göre filtrelemek isteyebilir. Bu durumda, kategori değerini query string olarak gönderebiliriz. Ama dikkat edilmesi gereken nokta, query string değerleri URL'de görünür. Bu nedenle, hassas verilerin gönderilmesi için kullanılmamalıdır.
+  + <a routerLink="a" [queryParams]="{x:3}">A</a> // query string olarak x=3 değerini gönderir.
+
+  'Query Değerlerini Okuma:
+  ~Observable ile:
+  + constructor(private activatedRoute: ActivatedRoute){
+  +   activatedRoute.queryParamMap.subscribe(({
+  +     next: param => console.log(param.get("x")) // URL'deki x parametresini okuma
+  +     next: param => console.log(param.get("y")) // URL'deki y parametresini okuma
+  +   });
+  ~ Snapshot ile:
+  + constructor(private activatedRoute: ActivatedRoute){
+  +   activatedRoute.snapshot.queryParamMap.get("x") // URL'deki x parametresini okuma
+  +   activatedRoute.snapshot.queryParamMap.get("y") // URL'deki y parametresini okuma
+  + }
+
+  'queryParamsHandling: "merge" : URL'deki mevcut query string değerlerini koruyarak yeni değer ekler.
+  +Örnek: /products?category=electronics&sort=price&x=3 şeklinde olur.
+  'queryParamsHandling: "preserve" : URL'deki mevcut query string değerlerini korur. Yeni değer eklemez.
+  +Örnek: /products?category=electronics&sort=price şeklinde olur.
 */
 
 @Component({
