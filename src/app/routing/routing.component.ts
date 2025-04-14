@@ -100,6 +100,55 @@ import { Component } from '@angular/core';
   +Örnek: /products?category=electronics&sort=price&x=3 şeklinde olur.
   'queryParamsHandling: "preserve" : URL'deki mevcut query string değerlerini korur. Yeni değer eklemez.
   +Örnek: /products?category=electronics&sort=price şeklinde olur.
+
+  *Guards : Angular uygulamalarında rotaların erişimini kontrol etmek için kullanılır. Örneğin, bir kullanıcının giriş yapmadan belirli bir sayfaya erişmesini engellemek için guards kullanılabilir. Guards, route tanımında canActivate, canDeactivate, canLoad gibi özelliklerle tanımlanır.
+
+  + canActivate: Kullanıcının belirli bir route'a erişip erişemeyeceğini kontrol eder. Eğer true dönerse route'a erişim izni verilir. false dönerse erişim engellenir.
+
+  + canDeactivate: Kullanıcının belirli bir route'dan çıkıp çıkamayacağını kontrol eder. Eğer true dönerse route'dan çıkış izni verilir. false dönerse çıkış engellenir.
+
+  + Resolve: Kullanıcının belirli bir route'a erişmeden önce belirli bir işlemi gerçekleştirmesini sağlar. Örneğin, bir kullanıcının giriş yapmadan belirli bir sayfaya erişmesini engellemek için kullanılabilir.
+
+  + canMatch: Kullanıcının belirli bir route ile eşleşip eşleşmeyeceğini kontrol eder. Eğer true dönerse route ile eşleşir. false dönerse eşleşme engellenir.
+
+  + canActivateChild: Kullanıcının belirli bir route'un altındaki child route'lara erişip erişemeyeceğini kontrol eder. Eğer true dönerse child route'a erişim izni verilir. false dönerse erişim engellenir.
+
+  'Guard'lar ng g g guardName olarak oluşturulabilir. Guard'lar, route tanımında canActivate, canDeactivate, canLoad gibi özelliklerle tanımlanır.
+
+  ^Guard'ların çalışma sırası: canMatch -> canActivate -> canActivateChild -> resolve -> canDeactivate
+
+
+  *Route Data Passing : Route tanımında data özelliği ile route'a veri geçişi yapılabilir. Bu veri, route'a erişildiğinde kullanılabilir. Örnek : {path: "products", component: ProductsComponent, data: {title: "Products"}} şeklinde tanımlanabilir. Bu veri, route'a erişildiğinde kullanılabilir.
+  + constructor(private activatedRoute: ActivatedRoute){
+  +   activatedRoute.data.subscribe(({
+  +     next: data => console.log(data.title) // Route'dan gelen veriyi okuma}
+  +   });
+
+  *Router Events: Angular uygulamasında router olaylarını dinlemek için kullanılır. Örneğin, bir route'a geçiş yapıldığında veya bir route'dan çıkıldığında belirli bir işlemi gerçekleştirmek için kullanılabilir. Router olayları, Router modülünden alınabilir. Örnek: router.events.subscribe((event) => {console.log(event)}) şeklinde tanımlanabilir.
+
+  !İşlem Sırası :
+  'NavigationStart ->             Yeni bir navigasyon başlatıldığında tetiklenir.
+  ' RoutesRecognized ->           Yönlendirmenin gerçekleştirileceği rotalar tanımlandığında tetiklenir.
+  '  GuardsCheckStart ->          Yönlendirmenin gerçekleştirileceği route'un mevcut guard'ları tetiklendiğinde tetiklenir.
+  '   ChildActivationStart ->     Yönlendirilecek route'un child route'ları tetiklendiğinde tetiklenir.
+  '    ActivationStart ->         Rotanın etkinleştirilmesi sırasında tetiklenir.
+  '     GuardsCheckEnd ->         Guard'ların kontrolü tamamlandığında tetiklenir.
+  '      ResolveStart ->          Yönlendirme yapılacak sayfanın verileri resolve edilmeye başlandığında tetiklenir.
+  '       ActivationEnd ->        Rotanın etkinleştirilmesi tamamlandığında tetiklenir.
+  '        ResolveEnd ->          Yönlendirme yapılacak sayfanın verileri resolve edildiğinde tetiklenir.
+  '         NavigationEnd ->      Navigasyon işlemi tamamlandığında tetiklenir.
+  '          NavigationCancel ->  Navigasyon işlemi iptal edildiğinde tetiklenir.
+  '           NavigationError ->  Navigasyon işlemi sırasında bir hata oluştuğunda tetiklenir.
+
+  ^Router Events'lere @angular/router path'i üzerinden erişilir ve kullanılabilir.
+
+  + constructor(private router: Router){
+  +   router.events.subscribe((event) => {
+  +     if (event instanceof NavigationStart) {
+  +       console.log("Navigation started");
+  +     } else if (event instanceof NavigationEnd) {
+  +       console.log("Navigation ended");
+  + }
 */
 
 @Component({
