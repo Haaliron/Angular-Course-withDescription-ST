@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 /*
 Binding, bağlantı yapısına göre şekillenebilmektedir,
@@ -15,7 +14,7 @@ Style Binding
 
 //* TEXT INTERPOLATION EXAMPLE (ONE - WAY DATA BINDING)
 
-  /*  
+  /*
       & @Component(
       &   {
       &   selector: 'app-databinding',
@@ -26,7 +25,7 @@ Style Binding
       &   styleUrl: './databinding.component.scss'
       &   }
       & )
-      & export class DatabindingComponent 
+      & export class DatabindingComponent
       & {
       &  data : string = "Data";
       & }
@@ -44,7 +43,7 @@ Style Binding
       !   styleUrl: './databinding.component.scss'
       !   }
       ! )
-      ! export class DatabindingComponent 
+      ! export class DatabindingComponent
       ! {
       !  source : string = "https://lh3.googleusercontent.com/zYC5m1Ag_BlrEhIusmI4nfu6k4wNt8uPo4hhAy66pzuVuTWmuwQZiKiaQmqYEdSwToUhdgq_15j6B9T3D2ZTbZRCk68=s1280-w1280-h800";
       !  width: number = 500;
@@ -64,7 +63,7 @@ Style Binding
       ?   styleUrl: './databinding.component.scss'
       ?   }
       ? )
-      ? export class DatabindingComponent 
+      ? export class DatabindingComponent
       ? {
       ?   btnClick1() //Tanımlanan Fonksiyon
       ?   {
@@ -83,14 +82,14 @@ Style Binding
       ^ @Component(
       ^   {
       ^   selector: 'app-databinding',
-      ^   imports: [FormsModule], // T-WDB Kullanabilmek için FormsModule import etmek gerekiyor. Form kontrollerini yönetmek için kullanılır. 
+      ^   imports: [FormsModule], // T-WDB Kullanabilmek için FormsModule import etmek gerekiyor. Form kontrollerini yönetmek için kullanılır.
       ^   template:`<input type="text" [(ngModel)] = "name"><h1>{{name}}</h1>`, // Two-Way Data Binding
       ^   styleUrl: './databinding.component.scss'
       ^   }
       ^ )
-      ^ export class DatabindingComponent 
+      ^ export class DatabindingComponent
       ^ {
-      ^  name : string = ""; 
+      ^  name : string = "";
       ^ }
 */
 
@@ -101,11 +100,11 @@ Style Binding
       ~   {
       ~   selector: 'app-databinding',
       ~   imports: [],
-      ~   template:`<button [disabled]="disabled">Tıkla</button>`, // Attribute Binding, Property Bindinge benzer
+      ~   template:`<button [disabled]="disabled">Tıkla</button>`, // Attribute Binding, Property Binding'e benzer
       ~   styleUrl: './databinding.component.scss'
       ~   }
       ~ )
-      ~ export class DatabindingComponent 
+      ~ export class DatabindingComponent
       ~ {
       ~   disabled : boolean = true;// Attribute Değeri
       ~ }
@@ -122,7 +121,7 @@ Style Binding
          styleUrl: './databinding.component.scss'
          }
        )
-       export class DatabindingComponent 
+       export class DatabindingComponent
        {
          bgColor : string = "green"; // Style Binding Değeri
        }
