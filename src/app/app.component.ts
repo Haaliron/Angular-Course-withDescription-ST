@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DependencyInjectionComponent } from "./dependency-injection/dependency-injection.component";
 
 @Component( //* Metadata, Decorator Componentin nasıl yapılandırılacağını belirtir
   {
@@ -10,7 +9,7 @@ import { DependencyInjectionComponent } from "./dependency-injection/dependency-
   //        </body>
   // gibi
 
-  imports: [RouterOutlet, DependencyInjectionComponent, DependencyInjectionComponent], // *Angular 16 ile app.module.ts kaldırıldığı için declare işlemi
+  imports: [RouterOutlet], // *Angular 16 ile app.module.ts kaldırıldığı için declare işlemi
 
   templateUrl: './app.component.html', //* Template
   //template:`<h1>Template Kullanımı</h1>`, //* Harici html dosyası kullanılmak istenmezse bu şekilde de kullanılabilir
